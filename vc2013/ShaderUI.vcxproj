@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C3E445E2-3BDA-4AFA-AABC-0EB9F46C6522}</ProjectGuid>
+    <RootNamespace>ShaderUI</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\cinder_0.9.0_vc2013\include";..\blocks\UI\src;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>"..\..\..\..\cinder_0.9.0_vc2013\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset)_d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>"..\..\..\..\cinder_0.9.0_vc2013\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\..\cinder_0.9.0_vc2013\include"</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>"..\..\..\..\cinder_0.9.0_vc2013\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset).lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>"..\..\..\..\cinder_0.9.0_vc2013\lib\msw\$(PlatformTarget)"</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding />
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\shaders\common.vert" />
+    <None Include="..\assets\shaders\demo.frag" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ClCompile Include="..\src\ShaderUIApp.cpp" />
+    <ClCompile Include="..\blocks\UI\src\BSplineEditor.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Button.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Canvas.cpp" />
+    <ClCompile Include="..\blocks\UI\src\ColorPicker.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Colors.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Control.cpp" />
+    <ClCompile Include="..\blocks\UI\src\ControlWithLabel.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Dialer.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Envelope.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Fps.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Globals.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Graph.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Label.cpp" />
+    <ClCompile Include="..\blocks\UI\src\MultiSlider.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Plotter.cpp" />
+    <ClCompile Include="..\blocks\UI\src\QuaternionOrderer.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Radio.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Range.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Responder.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Slider.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Spacer.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Spectrum.cpp" />
+    <ClCompile Include="..\blocks\UI\src\SuperCanvas.cpp" />
+    <ClCompile Include="..\blocks\UI\src\TextInput.cpp" />
+    <ClCompile Include="..\blocks\UI\src\TextureView.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Toggle.cpp" />
+    <ClCompile Include="..\blocks\UI\src\View.cpp" />
+    <ClCompile Include="..\blocks\UI\src\Waveform.cpp" />
+    <ClCompile Include="..\blocks\UI\src\WindowCanvas.cpp" />
+    <ClCompile Include="..\blocks\UI\src\XYPad.cpp" />
+    <ClCompile Include="..\src\UniformManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h" />
+    <ClInclude Include="..\blocks\UI\src\Alignments.h" />
+    <ClInclude Include="..\blocks\UI\src\BSplineEditor.h" />
+    <ClInclude Include="..\blocks\UI\src\Button.h" />
+    <ClInclude Include="..\blocks\UI\src\Canvas.h" />
+    <ClInclude Include="..\blocks\UI\src\ColorPicker.h" />
+    <ClInclude Include="..\blocks\UI\src\Colors.h" />
+    <ClInclude Include="..\blocks\UI\src\Control.h" />
+    <ClInclude Include="..\blocks\UI\src\Controls.h" />
+    <ClInclude Include="..\blocks\UI\src\ControlWithLabel.h" />
+    <ClInclude Include="..\blocks\UI\src\Dialer.h" />
+    <ClInclude Include="..\blocks\UI\src\Directions.h" />
+    <ClInclude Include="..\blocks\UI\src\Envelope.h" />
+    <ClInclude Include="..\blocks\UI\src\FontSizes.h" />
+    <ClInclude Include="..\blocks\UI\src\Fps.h" />
+    <ClInclude Include="..\blocks\UI\src\Globals.h" />
+    <ClInclude Include="..\blocks\UI\src\Graph.h" />
+    <ClInclude Include="..\blocks\UI\src\Helpers.h" />
+    <ClInclude Include="..\blocks\UI\src\Label.h" />
+    <ClInclude Include="..\blocks\UI\src\MultiSlider.h" />
+    <ClInclude Include="..\blocks\UI\src\Padding.h" />
+    <ClInclude Include="..\blocks\UI\src\Plotter.h" />
+    <ClInclude Include="..\blocks\UI\src\QuaternionOrderer.h" />
+    <ClInclude Include="..\blocks\UI\src\Radio.h" />
+    <ClInclude Include="..\blocks\UI\src\Range.h" />
+    <ClInclude Include="..\blocks\UI\src\RenderData.h" />
+    <ClInclude Include="..\blocks\UI\src\Responder.h" />
+    <ClInclude Include="..\blocks\UI\src\Slider.h" />
+    <ClInclude Include="..\blocks\UI\src\Spacer.h" />
+    <ClInclude Include="..\blocks\UI\src\Spectrum.h" />
+    <ClInclude Include="..\blocks\UI\src\States.h" />
+    <ClInclude Include="..\blocks\UI\src\SuperCanvas.h" />
+    <ClInclude Include="..\blocks\UI\src\TextInput.h" />
+    <ClInclude Include="..\blocks\UI\src\TextureView.h" />
+    <ClInclude Include="..\blocks\UI\src\Toggle.h" />
+    <ClInclude Include="..\blocks\UI\src\Triggers.h" />
+    <ClInclude Include="..\blocks\UI\src\UI.h" />
+    <ClInclude Include="..\blocks\UI\src\View.h" />
+    <ClInclude Include="..\blocks\UI\src\Waveform.h" />
+    <ClInclude Include="..\blocks\UI\src\WindowCanvas.h" />
+    <ClInclude Include="..\blocks\UI\src\XYPad.h" />
+    <ClInclude Include="..\include\UniformManager.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
