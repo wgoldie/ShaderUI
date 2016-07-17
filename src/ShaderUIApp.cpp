@@ -3,6 +3,9 @@
 #include "UI.h"
 #include "cinder/gl/gl.h"
 #include "UniformManager.h"
+#include <windows.h>
+#include <io.h>
+#include <fcntl.h>
 
 using namespace std;
 using namespace ci;
@@ -18,16 +21,19 @@ public:
 	void draw() override;
 private:
 	void setUniforms();
+	void setupUI();
+	void loadShader(DataSourceRef data);
 
 	SuperCanvasRef mUi;
 	UniformManager uniformStore;
 
+	bool shouldLoadFile = false;
 	vec2 window;
 	gl::FboRef	mFbo;
 	gl::GlslProgRef mGlsl;
 };
 
-/*void showWin32Console() {
+void showWin32Console() {
 static const WORD MAX_CONSOLE_LINES = 500;
 int hConHandle;
 long lStdHandle;
@@ -61,23 +67,23 @@ setvbuf(stderr, NULL, _IONBF, 0);
 // make cout, wcout, cin, wcin, wcerr, cerr, wclog and clog
 // point to console as well
 std::ios::sync_with_stdio();
-}*/
+}
 
 void ShaderUIApp::setup()
 {
-	//showWin32Console();
-	mUi = SuperCanvas::create("basic");
-	mUi->addSpacer();
+	showWin32Console();
 	mFbo = gl::Fbo::create(getWindowWidth(), getWindowHeight());
-	mGlsl = gl::GlslProg::create(
-		loadAsset("shaders/common.vert"),
-		loadAsset("shaders/demo.frag"));
-
-	auto uniforms = mGlsl->getActiveUniforms();
-	uniformStore.setUniforms(mUi, uniforms);
-
+	loadShader(loadAsset("shaders/demo.frag"));
 	gl::enableDepthWrite();
 	gl::enableDepthRead();
+}
+
+void ShaderUIApp::setupUI() {
+	mUi = SuperCanvas::create("basic");
+	mUi->addButton("Load shader", &shouldLoadFile);
+	mUi->addSpacer();
+	uniformStore = UniformManager();
+	uniformStore.setUniforms(mUi, mGlsl->getActiveUniforms());
 }
 
 void ShaderUIApp::resize()
@@ -91,8 +97,29 @@ void ShaderUIApp::mouseDown(MouseEvent event)
 {
 }
 
+void ShaderUIApp::loadShader(DataSourceRef data) {
+	try {
+		auto newShader = gl::GlslProg::create(loadAsset("shaders/common.vert"), data);
+		mGlsl = newShader;
+		setupUI();
+	}
+	catch (Exception e) {
+		cout << e.what();
+	}
+}
+
 void ShaderUIApp::update()
 {
+	if (shouldLoadFile) {
+		fs::path path = getOpenFilePath("");
+		if (fs::exists(path))
+		{
+			auto data = loadFile(path);
+			loadShader(data);
+		}
+
+		shouldLoadFile = false;
+	}
 }
 
 void ShaderUIApp::setUniforms() {

@@ -63,4 +63,6 @@ void UniformManager::setUniforms(SuperCanvasRef ui, vector<gl::GlslProg::Uniform
 			break;
 		}
 	}
+
+	ui->autoSizeToFitSubviews();
 }
