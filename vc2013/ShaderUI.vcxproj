@@ -109,6 +109,8 @@
   <ItemGroup>
     <None Include="..\assets\shaders\common.vert" />
     <None Include="..\assets\shaders\demo.frag" />
+    <None Include="..\assets\shaders\herringbone.frag" />
+    <None Include="..\assets\shaders\pindot.frag" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

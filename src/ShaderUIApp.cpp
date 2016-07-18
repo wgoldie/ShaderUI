@@ -24,10 +24,13 @@ private:
 	void setupUI();
 	void loadShader(DataSourceRef data);
 
+
 	SuperCanvasRef mUi;
 	UniformManager uniformStore;
-
+	DataSourceRef vert;
 	bool shouldLoadFile = false;
+	bool shouldReloadShader = false;
+	fs::path shaderPath;
 	vec2 window;
 	gl::FboRef	mFbo;
 	gl::GlslProgRef mGlsl;
@@ -73,6 +76,7 @@ void ShaderUIApp::setup()
 {
 	showWin32Console();
 	mFbo = gl::Fbo::create(getWindowWidth(), getWindowHeight());
+	vert = loadAsset("shaders/common.vert");
 	loadShader(loadAsset("shaders/demo.frag"));
 	gl::enableDepthWrite();
 	gl::enableDepthRead();
@@ -80,6 +84,7 @@ void ShaderUIApp::setup()
 
 void ShaderUIApp::setupUI() {
 	mUi = SuperCanvas::create("basic");
+	mUi->addButton("Reload shader", &shouldReloadShader);
 	mUi->addButton("Load shader", &shouldLoadFile);
 	mUi->addSpacer();
 	uniformStore = UniformManager();
@@ -99,7 +104,7 @@ void ShaderUIApp::mouseDown(MouseEvent event)
 
 void ShaderUIApp::loadShader(DataSourceRef data) {
 	try {
-		auto newShader = gl::GlslProg::create(loadAsset("shaders/common.vert"), data);
+		auto newShader = gl::GlslProg::create(vert, data);
 		mGlsl = newShader;
 		setupUI();
 	}
@@ -114,11 +119,22 @@ void ShaderUIApp::update()
 		fs::path path = getOpenFilePath("");
 		if (fs::exists(path))
 		{
+			shaderPath = path;
 			auto data = loadFile(path);
 			loadShader(data);
 		}
 
 		shouldLoadFile = false;
+	}
+
+	if (shouldReloadShader) {
+		if (fs::exists(shaderPath))
+		{
+			auto data = loadFile(shaderPath);
+			loadShader(data);
+		}
+
+		shouldReloadShader = false;
 	}
 }
 
