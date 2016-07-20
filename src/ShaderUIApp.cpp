@@ -21,9 +21,9 @@ public:
 	void draw() override;
 private:
 	void setUniforms();
-	void setupUI();
+	void setupUI(DataSourceRef data);
 	void loadShader(DataSourceRef data);
-
+	map<string, string> comments;
 
 	SuperCanvasRef mUi;
 	UniformManager uniformStore;
@@ -82,13 +82,13 @@ void ShaderUIApp::setup()
 	gl::enableDepthRead();
 }
 
-void ShaderUIApp::setupUI() {
+void ShaderUIApp::setupUI(DataSourceRef data) {
 	mUi = SuperCanvas::create("basic");
 	mUi->addButton("Reload shader", &shouldReloadShader);
 	mUi->addButton("Load shader", &shouldLoadFile);
 	mUi->addSpacer();
 	uniformStore = UniformManager();
-	uniformStore.setUniforms(mUi, mGlsl->getActiveUniforms());
+	uniformStore.setUniforms(mUi, mGlsl->getActiveUniforms(), loadString(data));
 }
 
 void ShaderUIApp::resize()
@@ -102,11 +102,12 @@ void ShaderUIApp::mouseDown(MouseEvent event)
 {
 }
 
+
 void ShaderUIApp::loadShader(DataSourceRef data) {
 	try {
 		auto newShader = gl::GlslProg::create(vert, data);
 		mGlsl = newShader;
-		setupUI();
+		setupUI(data);
 	}
 	catch (Exception e) {
 		cout << e.what();

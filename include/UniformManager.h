@@ -9,7 +9,8 @@ using namespace reza::ui;
 
 class UniformManager {
 public:
-	void setUniforms(SuperCanvasRef ui, vector<gl::GlslProg::Uniform> uniforms);
+	void setUniforms(SuperCanvasRef ui, vector<gl::GlslProg::Uniform> uniforms, string source);
+	static map<string, string> GetCommentMap(string data);
 	map<string, float> fUniforms;
 	map<string, int> iUniforms;
 	map<string, bool> bUniforms;
